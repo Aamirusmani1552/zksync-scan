@@ -62,55 +62,67 @@ export interface Result {
 }
 
 export interface Properties4 {
-  blockNumber: BlockNumber
-  newStateRoot: NewStateRoot
-  blockSize: BlockSize
-  commitTxHash: CommitTxHash
-  verifyTxHash: VerifyTxHash
-  committedAt: CommittedAt
-  finalizedAt: FinalizedAt
-  status: Status2
+  pagination: Pagination
+  list: List
 }
 
-export interface BlockNumber {
+export interface Pagination {
   type: string
-}
-
-export interface NewStateRoot {
-  type: string
-}
-
-export interface BlockSize {
-  type: string
-}
-
-export interface CommitTxHash {
-  type: string[]
-}
-
-export interface VerifyTxHash {
-  type: string[]
-}
-
-export interface CommittedAt {
-  type: string
-}
-
-export interface FinalizedAt {
-  type: string[]
-}
-
-export interface Status2 {
-  type: string
-}
-
-export interface Error {
-  type: string[]
   properties: Properties5
   required: string[]
 }
 
 export interface Properties5 {
+  from: From
+  limit: Limit
+  direction: Direction
+  count: Count
+}
+
+export interface From {
+  type: string
+}
+
+export interface Limit {
+  type: string
+}
+
+export interface Direction {
+  type: string
+}
+
+export interface Count {
+  type: string
+}
+
+export interface List {
+  batcId: number;
+  blockIndex:number;
+  blockNumber: number;
+  createdAt:string;
+  failReason?:string
+  op:{
+    accountId :number;
+    amount: string;
+    fee: string;
+    from: string;
+    nonce:number;
+    signature:{pubKey: string, signature: string}
+    to:string;  
+    token:number;
+    type: string;
+    validFrom: number;
+    validUntil:number;
+  }
+}
+
+export interface Error {
+  type: string[]
+  properties: Properties6
+  required: string[]
+}
+
+export interface Properties6 {
   errorType: ErrorType
   code: Code
   message: Message

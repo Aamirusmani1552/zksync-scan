@@ -12,9 +12,9 @@ export default function Home() {
   const [blockData, setBlockData] = useState<BlockDataRequest>();
 
   async function getData(from:string){
-        axios.get(`https://api.zksync.io/api/v0.2/blocks?from=${from}&limit=10&direction=older`).then((data) => {
+        axios.get<BlockDataRequest>(`https://api.zksync.io/api/v0.2/blocks?from=${from}&limit=10&direction=older`).then((data) => {
       console.log(data.data)
-      setBlockData(data.data as BlockDataRequest);
+      setBlockData(data.data);
     }).catch(err => {
       console.log(err);
     })
