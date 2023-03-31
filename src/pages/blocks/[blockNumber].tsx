@@ -3,23 +3,29 @@ import {useRouter} from 'next/router';
 import Header from "../../components/Header";
 import axios from "axios";
 import {SingleBlockDataResult} from "../../Types/SingleBlockDataResult";
+import Link from "next/link"
 
 const BlockInfo:FC = ():ReactElement=>{
   const router = useRouter();
   const {blockNumber} = router.query;
-  const [blockData, setBlockData] = useState<SigleBlockDataResult>();
+  const [blockData, setBlockData] = useState<SingleBlockDataResult>();
   
 
-  async function getBlockData(){
-    const response = await axios.get<SingleBlockDataResult>(`https://api.zksync.io/api/v0.2/blocks/${blockNumber}/transactions?from=latest&limit=10&direction=older`);
+  async function getBlockData(page:string){
 
-    if(response.data.result){
-      setBlockData(response.data);
-    }
+    axios.get<SingleBlockDataResult>(`https://api.zksync.io/api/v0.2/blocks/${blockNumber}/transactions?from=${page}&limit=10&direction=older`).then(data=>{
+      console.log(data.data, 'is the new ata')
+      if(data.data.result)
+      setBlockData(data.data);
+    }).catch((err)=>{
+      console.log(err)
+    })
+
   }
 
   useEffect(()=>{
-    getBlockData();
+    if(blockData) return;
+    getBlockData("latest");
   },[])
 
   console.log(blockData);
@@ -48,26 +54,36 @@ const BlockInfo:FC = ():ReactElement=>{
     </section>
     <section className="px-8 md:px-[128px] py-4 flex flex-col gap-4">
         <h3 className="text-xl md:text-3xl font-semibold text-backgroundGrey">Transactions</h3>
-        <table className="border-[1px] w-full rouned-lg ">
+        <table className="border-[1px] text-center w-full rouned-lg ">
+          <tbody>
             <tr className='text-sm bg-gray-100'>
-              <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2">Block Index</th>
-              <th className="px-4 py-2">Block Numbe</th>
-              <th className="px-4 py-2">Tx hash</th>
+              <th className="p-4">Status</th>
+              <th className="p-4">Block Index</th>
+              <th className="p-4">Block Number</th>
+              <th className="p-4">Tx hash</th>
             </tr>
 
           {blockData&& blockData.result.list.map((i,k)=>{
             return <tr key={k} className="text-xs border-t-[1px] border-b-[1px]">
-              <td className="px-4 py-2">
+              <td className="p-4">
                 <span className="bg-lightGrey text-backgroundGrey px-2 py-1 rounded-full text-xs">{i.status}</span>
               </td>
-              <td className="px-4 py-2">{i.blockIndex}</td>
-              <td className="px-4 py-2">{i.blockNumber}</td>
-              <td className="px-4 py-2">{i.txHash}</td>
+              <td className="p-4">{i.blockIndex}</td>
+              <td className="p-4">{i.blockNumber}</td>
+              <td className="p-4 underline cursor-pointer">
+                <Link href={`/transaction/${i.txHash}`}>{i.txHash.slice(1,6) + "..." + i.txHash.slice(-5)}</Link></td>
             </tr>
           })}
+          </tbody>   
         </table>
-      
+      <div className="flex items-center justify-end py-8">
+        <button className="bg-backgroundGrey text-white px-4 py-2 rounded-md "
+          onClick={()=>{
+            if(blockData && blockData.result.pagination.count > 10){ getBlockData(blockData.result.list[blockData.result.list.length -1].txHash)  
+            }
+          }}
+          >Previous</button>
+      </div>
       </section>
   </main>
 }
