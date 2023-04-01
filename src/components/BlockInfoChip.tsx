@@ -30,7 +30,7 @@ const BlockInfoChip: FC<Props> = ({ info, property }): ReactElement => {
           <TimeAgo date={info ? info : ""} />
         ) : property == "newStateRoot" ||
           property == "commitTxHash" ||
-          property == "verifyTxHash" ? (
+          property == "verifyTxHash"|| property == "submitterAddress"? (
           info?.toString().slice(0, 5) + "..." + info?.toString().slice(-5)
         ) : !info ? (
           "NA"

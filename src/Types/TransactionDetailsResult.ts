@@ -60,7 +60,7 @@ export interface Tx {
   type: string;
   txHash: string;
   blockNumber: number;
-  op: Op;
+  op: Enum;
   status?: string;
   failReason?: string;
   createdAt?: string;
@@ -75,10 +75,6 @@ export interface BlockNumber {
   type: string;
 }
 
-export interface Op {
-  type: string;
-  enum: Enum[];
-}
 
 export interface Enum {
   type: string;
@@ -87,7 +83,7 @@ export interface Enum {
   from?: string;
   nonce?: number;
   token?: number;
-  amount: any;
+  amount?: string|number;
   accountId?: number;
   validFrom?: number;
   validUntil?: number;
