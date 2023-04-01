@@ -1,141 +1,87 @@
 export interface SingleBlockDataResult {
-  $schema: string
-  type: string
-  properties: Properties
-  required: string[]
-}
-
-export interface Properties {
-  request: Request
-  status: Status
-  result: Result
-  error: Error
+  $schema: string;
+  type: string;
+  request: Request;
+  status: string;
+  result: Result;
+  error: Error;
+  required: string[];
 }
 
 export interface Request {
-  type: string
-  properties: Properties2
-  required: string[]
-}
-
-export interface Properties2 {
-  network: Network
-  apiVersion: ApiVersion
-  resource: Resource
-  args: Args
-  timestamp: Timestamp
+  type: string;
+  network: Network;
+  apiVersion: ApiVersion;
+  resource: Resource;
+  args: Args;
+  timestamp: string;
+  required: string[];
 }
 
 export interface Network {
-  type: string
-  enum: string[]
+  type: string;
+  enum: string[];
 }
 
 export interface ApiVersion {
-  type: string
-  enum: string[]
+  type: string;
+  enum: string[];
 }
 
 export interface Resource {
-  type: string
+  type: string;
 }
 
 export interface Args {
-  type: string
-  properties: Properties3
+  type: string;
+  properties: Properties3;
 }
 
 export interface Properties3 {}
 
-export interface Timestamp {
-  type: string
-}
-
-export interface Status {
-  type: string
-}
-
 export interface Result {
-  type: string[]
-  properties: Properties4
-  required: string[]
-}
-
-export interface Properties4 {
-  pagination: Pagination
-  list: List
+  type: string[];
+  pagination: Pagination;
+  list: List[];
+  required: string[];
 }
 
 export interface Pagination {
-  type: string
-  properties: Properties5
-  required: string[]
-}
-
-export interface Properties5 {
-  from: From
-  limit: Limit
-  direction: Direction
-  count: Count
-}
-
-export interface From {
-  type: string
-}
-
-export interface Limit {
-  type: string
-}
-
-export interface Direction {
-  type: string
-}
-
-export interface Count {
-  type: string
+  type: string;
+  from: number;
+  limit: number;
+  direction: string;
+  count: number;
+  required: string[];
 }
 
 export interface List {
   batcId: number;
-  blockIndex:number;
+  blockIndex: number;
   blockNumber: number;
-  createdAt:string;
-  failReason?:string
-  op:{
-    accountId :number;
+  createdAt: string;
+  failReason?: string;
+  op: {
+    accountId: number;
     amount: string;
     fee: string;
     from: string;
-    nonce:number;
-    signature:{pubKey: string, signature: string}
-    to:string;  
-    token:number;
+    nonce: number;
+    signature: { pubKey: string; signature: string };
+    to: string;
+    token: number;
     type: string;
     validFrom: number;
-    validUntil:number;
-  }
+    validUntil: number;
+  };
+  status: string;
+  txHash: string;
 }
 
 export interface Error {
-  type: string[]
-  properties: Properties6
-  required: string[]
-}
-
-export interface Properties6 {
-  errorType: ErrorType
-  code: Code
-  message: Message
-}
-
-export interface ErrorType {
-  type: string
-}
-
-export interface Code {
-  type: string
-}
-
-export interface Message {
-  type: string
+  type: string[];
+  errorType: string;
+  code: string;
+  message: string;
+  required: string[];
 }

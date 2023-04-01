@@ -1,4 +1,4 @@
-export interface NetworkDataResult {
+export interface BlockInfoResult {
   $schema: string;
   type: string;
   request: Request;
@@ -12,7 +12,7 @@ export interface Request {
   type: string;
   network: Network;
   apiVersion: ApiVersion;
-  resource: Resource;
+  resource: string;
   args: Args;
   timestamp: Timestamp;
   required: string[];
@@ -26,10 +26,6 @@ export interface Network {
 export interface ApiVersion {
   type: string;
   enum: string[];
-}
-
-export interface Resource {
-  type: string;
 }
 
 export interface Args {
@@ -49,29 +45,21 @@ export interface Status {
 
 export interface Result {
   type: string[];
-  lastCommitted: string;
-  finalized: string;
-  totalTransactions: string;
-  mempoolSize: string;
-  required: string[];
+  blockNumber: string;
+  newStateRoot: string;
+  blockSize: number;
+  commitTxHash?: string;
+  verifyTxHash?: string;
+  committedAt?: string;
+  finalizedAt?: string;
+  status: string;
+  required: string;
 }
 
 export interface Error {
   type: string[];
-  errorType: ErrorType;
-  code: Code;
-  message: Message;
+  errorType: string;
+  code: string;
+  message: string;
   required: string[];
-}
-
-export interface ErrorType {
-  type: string;
-}
-
-export interface Code {
-  type: string;
-}
-
-export interface Message {
-  type: string;
 }
