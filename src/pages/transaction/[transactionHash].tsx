@@ -7,7 +7,7 @@ import {
 import Header from "../../components/Header";
 import axios from "axios";
 import TransactionInfo from "@/components/TransactionInfo";
-import DynamicChipData from "@/components/DynamicChipData"
+import DynamicChipData from "@/components/DynamicChipData";
 
 const TransactionHx: FC = (): ReactElement => {
   const router = useRouter();
@@ -50,10 +50,9 @@ const TransactionHx: FC = (): ReactElement => {
         {txData && (
           <table className="w-full">
             <tbody>
-              <TransactionInfo data={txData.tx} op={txData.tx.op} />
+              <TransactionInfo data={txData.tx} />
 
-              <DynamicChipData />
-
+              <DynamicChipData op={txData.tx.op} />
             </tbody>
           </table>
         )}

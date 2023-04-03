@@ -75,7 +75,6 @@ export interface BlockNumber {
   type: string;
 }
 
-
 export interface Enum {
   type: string;
   to?: string;
@@ -83,7 +82,7 @@ export interface Enum {
   from?: string;
   nonce?: number;
   token?: number;
-  amount?: string|number;
+  amount?: string | number;
   accountId?: number;
   validFrom?: number;
   validUntil?: number;
@@ -101,7 +100,7 @@ export interface Enum {
   submitterId?: number;
   submitterAddress?: string;
   orders?: Order[];
-  amounts?: string[];
+  amounts?: string[] | number[];
   feeToken?: number;
   creatorId?: number;
   creatorAddress?: string;
