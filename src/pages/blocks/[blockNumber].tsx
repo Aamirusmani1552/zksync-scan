@@ -12,6 +12,8 @@ import {
   Result as Result2,
 } from "../../Types/BlockInfoResult";
 import BlockInfoChip from "@/components/BlockInfoChip";
+import Loader from "@/components/Loader";
+import { customError } from "@/Types/AccountDetailsResult";
 
 const BlockInfo: FC = (): ReactElement => {
   const router = useRouter();
@@ -31,6 +33,8 @@ const BlockInfo: FC = (): ReactElement => {
         }
       })
       .catch((err) => {
+        const error = err as customError;
+        alert(error.code + ": " + error.message);
         console.log(err);
       });
 
@@ -44,6 +48,8 @@ const BlockInfo: FC = (): ReactElement => {
         }
       })
       .catch((err) => {
+        const error = err as customError;
+        alert(error.code + ": " + error.message);
         console.log(err);
       });
   }
@@ -119,6 +125,8 @@ const BlockInfo: FC = (): ReactElement => {
               })}
           </tbody>
         </table>
+        {!blockData && <Loader />}
+
         <div className="flex items-center justify-end py-8">
           <button
             className="bg-backgroundGrey text-white px-4 py-2 rounded-md "

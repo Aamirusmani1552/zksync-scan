@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import Banner from "../components/Banner";
 import BlockDataChip from "../components/BlockDataChip";
 import { BlockDataRequest, Result } from "../Types/BlockDataRequest";
+import Loader from "@/components/Loader";
+import { customError } from "@/Types/AccountDetailsResult";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -23,6 +25,8 @@ export default function Home() {
         }
       })
       .catch((err) => {
+        const error = err as customError;
+        alert(error.code + ": " + error.message);
         console.log(err);
       });
   }
@@ -43,7 +47,7 @@ export default function Home() {
       <main className={inter.className + "w-screen min-h-screen"}>
         <Header />
         <Banner />
-        <div className="w-full px-8 md:px-[128px] py-10 pt-[100px] md:pt-16 text-xs flex flex-col">
+        <div className="w-full px-8 md:px-[128px] py-10 pt-[200px] md:pt-16 text-xs flex flex-col">
           <h1 className="text-xl font-semibold py-4">Latest Blocks</h1>
 
           <div className="flex px-6 items-center justify-between bg-lightGrey py-4 rounded-tl-lg text-sm rounded-tr-lg">
@@ -52,10 +56,13 @@ export default function Home() {
             <span>Size</span>
             <span>Age</span>
           </div>
-          {blockData &&
+          {blockData ? (
             blockData.list.map((i, k) => {
               return <BlockDataChip key={k} item={i} />;
-            })}
+            })
+          ) : (
+            <Loader />
+          )}
         </div>
 
         <div className="px-8 md:px-[128px] flex items-center justify-end pb-8">

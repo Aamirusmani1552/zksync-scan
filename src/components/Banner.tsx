@@ -35,7 +35,7 @@ const Banner: FC = (): ReactElement => {
         </h3>
       </div>
 
-      <div className="w-full max-w-[85%] absolute rounded-lg p-6 bg-white text-backgroundGrey left-[50%] translate-x-[-50%] shadow-md bottom-[-100px] md:bottom-[-60px] gap-4 justify-between flex flex-col md:flex-row">
+      <div className="w-full max-w-[85%] absolute rounded-lg p-6 bg-white text-backgroundGrey left-[50%] translate-x-[-50%] shadow-md bottom-[-180px] md:bottom-[-60px] gap-4 justify-between flex flex-col md:flex-row">
         {/*    title    */}
         <div>
           <p className="text-2xl font-semibold">Network Stats</p>
@@ -43,7 +43,7 @@ const Banner: FC = (): ReactElement => {
         </div>
         {/*    data    */}
         {networkData && (
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <div className="border-r-[1px] pr-8">
               <h3 className="text-lg md:text-xl  text-gray-500">
                 Committed Blocks
