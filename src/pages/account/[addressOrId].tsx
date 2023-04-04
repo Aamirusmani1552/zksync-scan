@@ -16,7 +16,7 @@ import Link from "next/link";
 import Loader from "@/components/Loader";
 type Props = {};
 
-const addressDetails = (props: Props) => {
+const AddressDetails = (props: Props) => {
   const router = useRouter();
   const { addressOrId } = router.query;
   const [accountData, setAccountData] = useState<Result>();
@@ -193,4 +193,4 @@ const addressDetails = (props: Props) => {
   );
 };
 
-export default addressDetails;
+export default AddressDetails;
